@@ -1,0 +1,23 @@
+<table>
+    <thead>
+      <tr>
+          <th>Nome</th>
+          <th>Tipo</th>
+          <th>Raça</th>
+          <th>Data de Nascimento</th>
+      </tr>
+    </thead>
+  
+      <tr *ngFor="let animal of animais">
+        <td>{{this.animal.nome}}</td>
+        <td>{{this.animal.tipo}}</td>
+        <td>{{this.animal.raca}}</td>
+        <td>{{this.animal.dataNascimento}}</td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <button class="btn" type="button" (click)="notify.emit()">Informativo</button>
+        </td>
+      </tr>
+  </table>
+  <br>

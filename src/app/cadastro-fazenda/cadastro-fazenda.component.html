@@ -1,1 +1,41 @@
-<p>Cadastrar Animais da Fazenda</p>
+<div class="row">
+    <form class="col s12" (ngSubmit)="onSubmit">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="input-nome" type="text" name="input-nome" [(ngModel)]="this.animal.nome">
+                <label for="input-nome">Nome</label>
+              </div>
+            <div class="input-field col s5">
+                <input id="input-tipo" type="text" name="input-tipo"[(ngModel)]="this.animal.tipo">
+                <label for="input-tipo">Tipo</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="input-raca" type="text" name="input-raca" [(ngModel)]="this.animal.raca">
+                <label for="input-raca">Raça</label>
+              </div>
+            <div class="input-field col s5">
+                <input id="input-dataNascimento" name="input-dataNascimento" type="date" placeholder="dd-mm-yyyy" min="01-01-1901" max="31-12-2050" [(ngModel)]="this.animal.dataNascimento">
+                <label for="input-dataNascimento">Data de Nascimento</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="input-observacao" type="text" name="input-observacao" [(ngModel)]="this.animal.observacao">
+                <label for="input-observacao">Observação</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">
+                <button class="btn" type="button" (click)="onSaveClick()">Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>
+<app-listagem-fazenda [animais]="animais" (notify)="onNotify()">
+</app-listagem-fazenda>
+<nav>
+    <a routerLink="../TesteRotaComponent" routerLinkActive="active"></a>
+</nav>
+  
