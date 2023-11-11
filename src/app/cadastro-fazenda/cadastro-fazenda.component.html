@@ -1,41 +1,91 @@
 <div class="row">
-    <form class="col s12" (ngSubmit)="onSubmit">
+    <form class="col s12" #form="ngForm" (submit)="onSubmit()">
         <div class="row">
             <div class="input-field col s6">
-                <input id="input-nome" type="text" name="input-nome" [(ngModel)]="this.animal.nome">
+                <input id="input-nome" type="text" name="input-nome" class="validate" [(ngModel)]="this.animal.nome" 
+                pattern=".{1,100}"
+                #nome="ngModel"
+                required>
                 <label for="input-nome">Nome</label>
+                <div class="red-text" *ngIf="nome.errors?.['required'] && nome.touched">
+                    O nome é obrigatório.
+                </div>
               </div>
             <div class="input-field col s5">
-                <input id="input-tipo" type="text" name="input-tipo"[(ngModel)]="this.animal.tipo">
+                <input id="input-tipo" type="text" name="input-tipo" class="validate" [(ngModel)]="this.animal.tipo"
+                pattern=".{1,100}"
+                #tipo="ngModel"
+                required>
                 <label for="input-tipo">Tipo</label>
+                <div class="red-text" *ngIf="tipo.errors?.['required'] && tipo.touched">
+                    O Tipo do Animal é obrigatório.
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s6">
-                <input id="input-raca" type="text" name="input-raca" [(ngModel)]="this.animal.raca">
+                <input id="input-raca" type="text" name="input-raca" class="validate" [(ngModel)]="this.animal.raca"
+                #raca="ngModel"
+                required>
                 <label for="input-raca">Raça</label>
+                <div class="red-text" *ngIf="raca.errors?.['required'] && raca.touched">
+                    A Raça do Animal é obrigatório.
+                </div>
               </div>
             <div class="input-field col s5">
-                <input id="input-dataNascimento" name="input-dataNascimento" type="date" placeholder="dd-mm-yyyy" min="01-01-1901" max="31-12-2050" [(ngModel)]="this.animal.dataNascimento">
+                <input id="input-dataNascimento" name="input-dataNascimento" type="date" class="validate" placeholder="dd-mm-yyyy" min="01-01-1901" max="31-12-2050" [(ngModel)]="this.animal.dataNascimento"
+                #dataNascimento="ngModel"
+                required>
                 <label for="input-dataNascimento">Data de Nascimento</label>
+                <div class="red-text" *ngIf="dataNascimento.errors?.['required'] && dataNascimento.touched">
+                    A Data de Nascimento do Animal é obrigatório.
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s6">
-                <input id="input-observacao" type="text" name="input-observacao" [(ngModel)]="this.animal.observacao">
+                <input id="input-observacao" type="text" name="input-observacao" class="validate"  [(ngModel)]="this.animal.observacao"
+                pattern=".{4,100}"
+                #observacao="ngModel">
                 <label for="input-observacao">Observação</label>
+                <div class="red-text" *ngIf="observacao.invalid && observacao.touched">
+                    A observação deve conter de 4 a 100 Caracteres.
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col s2">
-                <button class="btn" type="button" (click)="onSaveClick()">Salvar</button>
+                <button class="btn" type="submit" [disabled]="!form.valid">Salvar</button>
             </div>
         </div>
     </form>
 </div>
-<app-listagem-fazenda [animais]="animais" (notify)="onNotify()">
-</app-listagem-fazenda>
+<table class="highlight" *ngIf="animais && animais!.length > 0">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Raça</th>
+            <th>Data de Nascimento</th>
+            <th>Observação</th>
+            <th>Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let a of animais">
+        <td>{{a.nome}}</td>
+        <td>{{a.tipo}}</td>
+        <td>{{a.raca}}</td>
+        <td>{{a.dataNascimento}}</td>
+        <td>{{a.observacao}}</td>
+        <td class="center" >
+          <a><i class="btn" (click)="onEdit(a)">Editar</i></a>
+          <a><i class="btn" (click)="onDelete(a.nome)">Deletar</i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 <nav>
-    <a routerLink="../TesteRotaComponent" routerLinkActive="active"></a>
+    <a routerLink="../TesteRota" routerLinkActive="active"></a>
 </nav>
   

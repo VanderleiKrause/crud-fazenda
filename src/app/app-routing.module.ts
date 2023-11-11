@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{ path: 'cadastro-fazenda', component: CadastroFazendaComponent },
-                        { path: 'listagem-fazenda', component: ListagemFazendaComponent },
                         { path: 'testeRota', component: TesteRotaComponent },
                         { path: 'testeRota/:id', component: TesteRotaComponent },
                         { path: '', redirectTo: '/cadastro-fazenda', pathMatch: 'full' }];//set up routes contant
