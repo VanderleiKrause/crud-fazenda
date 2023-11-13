@@ -1,6 +1,6 @@
+import { AnimalPromisseService } from './../services/animal-promisse.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Animal } from '../model/animal';
-import { Shared } from '../util/shared';
 import { NgForm } from '@angular/forms';
 import { AnimalStorageService } from './cadastro-fazenda-storage.service';
 
@@ -8,60 +8,52 @@ import { AnimalStorageService } from './cadastro-fazenda-storage.service';
   selector: 'cadastro-fazenda',
   templateUrl: './cadastro-fazenda.component.html',
   styleUrls: ['./cadastro-fazenda.Component.css'],
-  providers: [AnimalStorageService],
+  providers: [AnimalStorageService, AnimalPromisseService],
 })
 export class CadastroFazendaComponent implements OnInit,AfterViewInit{
   @ViewChild('form') form!: NgForm;
 
   animal!: Animal;
-  animais!: Animal[];
+  animais!: Promise<Animal[]>;
   title = 'crud-fazenda';
   
-  constructor(private animalService: AnimalStorageService){
+  constructor(private animalStorageService: AnimalStorageService){
 
   }
-
+  getAnimais(){
+    return this.animalStorageService.animais;
+  }
   ngOnInit(): void {
-    Shared.initializeWebStorage();
-    this.animal = new Animal("","","","","");
-    this.animais = this.animalService.getAnimais();
+    this.animal = new Animal(0,"","","","","");
+    this.animais = this.animalStorageService.getAnimais();
   }
   onSubmit(){
-    if (!this.animalService.isExist(this.animal.nome)) {
-      this.animalService.save(this.animal);
+    let a = Animal.clone(this.animal);
+    if (!this.animalStorageService.isExist(this.animal.id)) {
+      this.animalStorageService.save(a);
     } else {
-      this.animalService.update(this.animal);
+      this.animalStorageService.update(a);
     }
 
     this.form.reset();
-    this.animal = new Animal("","","","","");
-
-    this.animais = this.animalService.getAnimais();
-
-    this.animalService.notifyTotalAnimais();
-
+    this.animal = new Animal(0,"","","","","");
   }
-
   onEdit(animal: Animal) {
-    let clone = Animal.clone(animal);
-    this.animal = clone;
+    let a = Animal.clone(animal);
+    this.animal = a;
   }
-
-  onDelete(nome: string) {
-    let confirmation = window.confirm('Deseja realmente remover o ' + nome + '?');
+  onDelete(animal: Animal) {
+    let confirmation = window.confirm('Deseja realmente remover o ' + animal.nome + '?');
     if (!confirmation) {
       return;
     }
-    let response: boolean = this.animalService.delete(nome);
+    let response: boolean = this.animalStorageService.delete(animal);
 
-    this.animais = this.animalService.getAnimais();
-    this.animalService.notifyTotalAnimais();
   }
-
   ngAfterViewInit(): void {
 
   }
   onNotify() {
-    window.alert('Tem um total de ' + this.animais.length + ' animais.');
+    window.alert('Tem um total de ' + this.animalStorageService.notifyTotalAnimais + ' animais.');
   }
 }

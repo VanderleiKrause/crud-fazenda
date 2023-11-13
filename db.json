@@ -1,0 +1,36 @@
+{
+  "animais": [
+    {
+      "id": 1,
+      "nome": "Beleno",
+      "tipo": "Bovino",
+      "raca": "Nelore",
+      "dataNascimento": "2022-01-01",
+      "observacao": "Animal comprado no vizinho"
+    },
+    {
+      "id": 2,
+      "nome": "Tiberios",
+      "tipo": "Canino",
+      "raca": "Boxer",
+      "dataNascimento": "2021-02-21",
+      "observacao": "Boxer puro"
+    },
+    {
+      "id": 20,
+      "nome": "Tiberiosss",
+      "tipo": "Canino",
+      "raca": "Boxer",
+      "dataNascimento": "2021-02-21",
+      "observacao": "Boxer puro"
+    },
+    {
+      "nome": "Tiberiosss",
+      "tipo": "Canino",
+      "raca": "Boxer",
+      "dataNascimento": "2021-02-21",
+      "observacao": "Boxer puro",
+      "id": 21
+    }
+  ]
+}

@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CadastroFazendaComponent } from './cadastro-fazenda/cadastro-fazenda.component';
 import { TesteRotaComponent } from './testeRota/testeRota.component';
 import { ListagemFazendaComponent } from './listagem-fazenda/listagem-fazenda.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ListagemFazendaComponent } from './listagem-fazenda/listagem-fazenda.co
     MatSidenavModule,
     FormsModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

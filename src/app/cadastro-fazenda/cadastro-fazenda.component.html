@@ -60,7 +60,7 @@
         </div>
     </form>
 </div>
-<table class="highlight" *ngIf="animais && animais!.length > 0">
+<table class="highlight" *ngIf="getAnimais() && getAnimais()!.length > 0">
     <thead>
         <tr>
             <th>Nome</th>
@@ -72,7 +72,7 @@
         </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let a of animais">
+      <tr *ngFor="let a of getAnimais()">
         <td>{{a.nome}}</td>
         <td>{{a.tipo}}</td>
         <td>{{a.raca}}</td>
@@ -80,7 +80,7 @@
         <td>{{a.observacao}}</td>
         <td class="center" >
           <a><i class="btn" (click)="onEdit(a)">Editar</i></a>
-          <a><i class="btn" (click)="onDelete(a.nome)">Deletar</i></a>
+          <a><i class="btn" (click)="onDelete(a)">Deletar</i></a>
         </td>
       </tr>
     </tbody>

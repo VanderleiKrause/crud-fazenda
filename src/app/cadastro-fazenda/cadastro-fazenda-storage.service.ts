@@ -1,63 +1,57 @@
 import { Animal } from '../model/animal';
 import { Constants } from './../util/constants';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { WebStorageUtil } from '../util/web-storage-util';
-import { Shared } from '../util/shared';
+import { AnimalPromisseService } from '../services/animal-promisse.service';
 
 @Injectable()
 export class AnimalStorageService {
   animais!: Animal[];
   private animalSource!: BehaviorSubject<number>;
-  constructor() {
-    Shared.initializeWebStorage();
-    this.animais = WebStorageUtil.get(Constants.ANIMAIS_KEY);
-    this.animalSource = new BehaviorSubject<number>(this.animais.length);
+  constructor(private animalPromisseService: AnimalPromisseService) {
+    this.animalPromisseService.get().then((value) =>{this.animais =<Animal[]>value})
+                          .catch((e) => {this.animais = [] });
   }
 
   save(animal: Animal) {
-    this.animais = WebStorageUtil.get(Constants.ANIMAIS_KEY);
     this.animais.push(animal);
-    WebStorageUtil.set(Constants.ANIMAIS_KEY, this.animais);
+    this.animalPromisseService.post(animal).then((value) =>{})
+    .catch((e) => {});
   }
 
   update(animal: Animal) {
-    this.animais = WebStorageUtil.get(Constants.ANIMAIS_KEY);
-    this.delete(animal.nome);
-    this.save(animal);
+    this.animais = this.animais.filter((c) => {
+      return c.id?.valueOf() != animal.id?.valueOf();
+    });
+    this.animais.push(animal);
+    this.animalPromisseService.put(animal).then((value) =>{})
+    .catch((e) => {});
   }
 
-  delete(nome: string): boolean {
-    this.animais = WebStorageUtil.get(Constants.ANIMAIS_KEY);
-    this.animais = this.animais.filter((c) => {
-      return c.nome?.valueOf() != nome?.valueOf();
-    });
-
-    WebStorageUtil.set(Constants.ANIMAIS_KEY, this.animais);
+  delete(animal: Animal): boolean {
+    this.animais = this.animais.filter((c) => {return c.id?.valueOf() != animal.id?.valueOf();});
+    this.animalPromisseService.delete(animal).then((value) =>{})
+                                     .catch((e) => {});
     return true;
   }
 
-  isExist(value: string): boolean {
-    this.animais = WebStorageUtil.get(Constants.ANIMAIS_KEY);
-    for (let animal of this.animais) {
-      if (animal.nome?.valueOf() == value?.valueOf()) {
+  isExist(value: number): boolean {
+    for (let c of this.animais) {
+      if (c.id?.valueOf() == value?.valueOf()) {
         return true;
       }
     }
     return false;
   }
 
-  getAnimais(): Animal[] {
-    this.animais = WebStorageUtil.get(Constants.ANIMAIS_KEY);
+  async getAnimais(): Promise<Animal[]> {
+    this.animais =  <Animal[]> await this.animalPromisseService.get();
     return this.animais;
   }
 
   notifyTotalAnimais() {
-    this.animalSource.next(this.getAnimais()?.length);
+    this.animalSource.next(this.animais.length);
   }
 
-  asObservable(): Observable<number> {
-    return this.animalSource;
-  }
 }
