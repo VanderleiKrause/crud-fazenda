@@ -3,21 +3,25 @@ import { Constants } from './../util/constants';
 import { BehaviorSubject } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { AnimalPromisseService } from '../services/animal-promisse.service';
+//import { AnimalPromisseService } from '../services/animal-promisse.service';
+import { AnimalObservableService} from './../services/animal-observable.service';
 
 @Injectable()
 export class AnimalStorageService {
   animais!: Animal[];
   private animalSource!: BehaviorSubject<number>;
-  constructor(private animalPromisseService: AnimalPromisseService) {
-    this.animalPromisseService.get().then((value) =>{this.animais =<Animal[]>value})
-                          .catch((e) => {this.animais = [] });
+  constructor(private animalObservableService: AnimalObservableService) {
+    this.animalObservableService.getAll().subscribe((value) =>{this.animais =<Animal[]>value});
+
+  }
+
+  notifyTotalAnimais() {
+    this.animalSource.next(this.animais.length);
   }
 
   save(animal: Animal) {
     this.animais.push(animal);
-    this.animalPromisseService.post(animal).then((value) =>{})
-    .catch((e) => {});
+    this.animalObservableService.post(animal).subscribe((value) =>{});
   }
 
   update(animal: Animal) {
@@ -25,14 +29,12 @@ export class AnimalStorageService {
       return c.id?.valueOf() != animal.id?.valueOf();
     });
     this.animais.push(animal);
-    this.animalPromisseService.put(animal).then((value) =>{})
-    .catch((e) => {});
+    this.animalObservableService.put(animal).subscribe((value) =>{});
   }
 
   delete(animal: Animal): boolean {
     this.animais = this.animais.filter((c) => {return c.id?.valueOf() != animal.id?.valueOf();});
-    this.animalPromisseService.delete(animal).then((value) =>{})
-                                     .catch((e) => {});
+    this.animalObservableService.delete(animal).subscribe((value) =>{});
     return true;
   }
 
@@ -46,12 +48,7 @@ export class AnimalStorageService {
   }
 
   async getAnimais(): Promise<Animal[]> {
-    this.animais =  <Animal[]> await this.animalPromisseService.get();
+    this.animalObservableService.getAll().subscribe((value) =>{this.animais =<Animal[]>value});;
     return this.animais;
   }
-
-  notifyTotalAnimais() {
-    this.animalSource.next(this.animais.length);
-  }
-
 }

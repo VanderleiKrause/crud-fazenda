@@ -24,7 +24,7 @@ export class CadastroFazendaComponent implements OnInit,AfterViewInit{
     return this.animalStorageService.animais;
   }
   ngOnInit(): void {
-    this.animal = new Animal(0,"","","","","");
+    this.animal = new Animal(Math.random(),"","","","","");
     this.animais = this.animalStorageService.getAnimais();
   }
   onSubmit(){
@@ -36,7 +36,7 @@ export class CadastroFazendaComponent implements OnInit,AfterViewInit{
     }
 
     this.form.reset();
-    this.animal = new Animal(0,"","","","","");
+    this.animal = new Animal(Math.random(),"","","","","");
   }
   onEdit(animal: Animal) {
     let a = Animal.clone(animal);

@@ -68,7 +68,7 @@
             <th>Raça</th>
             <th>Data de Nascimento</th>
             <th>Observação</th>
-            <th>Opções</th>
+            <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
@@ -76,7 +76,7 @@
         <td>{{a.nome}}</td>
         <td>{{a.tipo}}</td>
         <td>{{a.raca}}</td>
-        <td>{{a.dataNascimento}}</td>
+        <td>{{a.dataNascimento | date: "dd/MM/yyyy"}}</td>
         <td>{{a.observacao}}</td>
         <td class="center" >
           <a><i class="btn" (click)="onEdit(a)">Editar</i></a>
