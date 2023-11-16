@@ -1,10 +1,21 @@
+import { TesteRotaComponent } from './testeRota/testeRota.component';
+import { ListagemFazendaComponent } from './listagem-fazenda/listagem-fazenda.component';
+import { CadastroFazendaComponent } from './cadastro-fazenda/cadastro-fazenda.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [{ path: 'cadastro-fazenda', component: CadastroFazendaComponent },
+                        { path: 'testeRota', component: TesteRotaComponent },
+                        { path: 'testeRota/:id', component: TesteRotaComponent },
+                        { path: '', redirectTo: '/cadastro-fazenda', pathMatch: 'full' }];//set up routes contant
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  declarations: [],
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

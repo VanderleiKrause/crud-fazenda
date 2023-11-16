@@ -1,0 +1,28 @@
+{
+  "animais": [
+    {
+      "id": 1,
+      "nome": "Beleno",
+      "tipo": "Bovino",
+      "raca": "Nelore",
+      "dataNascimento": "2022-01-01",
+      "observacao": "Animal comprado no vizinho"
+    },
+    {
+      "id": 2,
+      "nome": "Tiberios",
+      "tipo": "Canino",
+      "raca": "Boxer",
+      "dataNascimento": "2021-02-21",
+      "observacao": "Boxer puro"
+    },
+    {
+      "id": 0.6795050282439332,
+      "nome": "Vaca teste",
+      "tipo": "Bovino",
+      "raca": "Angus",
+      "dataNascimento": "2022-12-30",
+      "observacao": "Vaca 1/3 de Angus"
+    }
+  ]
+}
