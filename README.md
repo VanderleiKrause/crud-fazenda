@@ -1,10 +1,11 @@
 # Crud-Fazenda
 
 Este projeto tem como objetivo cadastrar, alterar e excluir animais que o usuário possui em sua fazenda.
+https://github.com/VanderleiKrause/crud-fazenda
 
 ## Endereço de Deploy - GitHub Pages
 
-https://github.com/VanderleiKrause/crud-fazenda
+https://vanderleikrause.github.io/crud-fazenda/
 
 ## Protótipo
 
@@ -18,17 +19,17 @@ https://www.figma.com/file/xgFjhBA5NZEA0hLo6B4lUs/CRUDFazenda?type=design&node-i
 - [x] Desenvolver o layout da aplicação com componentes, tornando o cabeçalho e o rodapé componentes reutilizáveis.
 - [x] Aplicar pelo menos dois tipos de data-binding, como Interpolation, Property Binding, Event Binding, Two-Way Data Binding, 
 - [x] Empregar variáveis de template e a anotação ViewChild para interagir com elementos do DOM ou componentes diretamente no template ou no código TypeScript do aplicativo.
-- [x] Estabelecer a passagem de dados entre componentes por meio da hierarquia de componentes, empregando as anotações @Input e @Output.
-- [x] Transferir dados, por meio de serviços, entre componentes que não estão diretamente relacionados.
+- [X] Estabelecer a passagem de dados entre componentes por meio da hierarquia de componentes, empregando as anotações @Input e @Output.
+- [ ] Transferir dados, por meio de serviços, entre componentes que não estão diretamente relacionados.
 - [x] Mapear os componentes às rotas no módulo de rotas, criando uma estrutura de navegação eficiente.
 - [x] Permitir a navegação fluida entre as diferentes páginas do aplicativo por meio de links e botões de navegação.
 - [X] Validar os campos do formulário com expressões regulares (REGEX) e apresentar as mensagens de erro.
 - [x] Implementar máscaras em campos de formulário, quando necessário, para melhorar a experiência do usuário ao inserir dados.
 - [X] Desabilitar o botão de envio (submit) enquanto o formulário estiver em um estado inválido.
-- [X] Realizar requisições à API com tratamento adequado das respostas de sucesso e erro com Promises.
-- [X] Realizar requisições à API com tratamento adequado das respostas de sucesso e erro com Observables.
+- [ ] Realizar requisições à API com tratamento adequado das respostas de sucesso e erro com Promises.
+- [ ] Realizar requisições à API com tratamento adequado das respostas de sucesso e erro com Observables.
 - [X] Criar o cadastro completo de uma entidade, incluindo operações de criação, leitura, atualização e exclusão (CRUD) utilizando uma API, como o JSON Server.
-- [X] Utilizar o armazenamento local (LocalStorage ou SessionStorage) para armazenar dados temporários, quando necessário.
+- [ ] Utilizar o armazenamento local (LocalStorage ou SessionStorage) para armazenar dados temporários, quando necessário.
 - [X] Aplicar a diretiva estrutural ngFor para apresentar uma lista dinâmica de dados em seu aplicativo.
 - [X] Utilizar a diretiva ngIf para controlar a exibição ou ocultação de elementos com base em condições específicas.
 - [X] Formatar a apresentação de dados com Pipes, de acordo com os requisitos do aplicativo.

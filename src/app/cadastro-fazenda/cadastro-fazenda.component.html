@@ -33,7 +33,9 @@
                 </div>
               </div>
             <div class="input-field col s5">
-                <input id="input-dataNascimento" name="input-dataNascimento" type="date" class="validate" placeholder="dd-mm-yyyy" min="01-01-1901" max="31-12-2050" [(ngModel)]="this.animal.dataNascimento"
+                <input id="input-dataNascimento" name="input-dataNascimento" type="date" 
+                class="validate" placeholder="dd-mm-yyyy" min="01-01-1901" 
+                max="31-12-2050" [(ngModel)]="this.animal.dataNascimento"
                 #dataNascimento="ngModel"
                 required>
                 <label for="input-dataNascimento">Data de Nascimento</label>
@@ -60,7 +62,8 @@
         </div>
     </form>
 </div>
-<table class="highlight" *ngIf="getAnimais() && getAnimais()!.length > 0">
+<div class="row">
+<table class="responsive-table" *ngIf="getAnimais() && getAnimais()!.length > 0">
     <thead>
         <tr>
             <th>Nome</th>
@@ -78,13 +81,14 @@
         <td>{{a.raca}}</td>
         <td>{{a.dataNascimento | date: "dd/MM/yyyy"}}</td>
         <td>{{a.observacao}}</td>
-        <td class="center" >
+        <td >
           <a><i class="btn" (click)="onEdit(a)">Editar</i></a>
-          <a><i class="btn" (click)="onDelete(a)">Deletar</i></a>
+          <a><i class="btn" (click)="onDelete(a)">Gravar</i></a>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
 <nav>
     <a routerLink="../TesteRota" routerLinkActive="active"></a>
 </nav>
